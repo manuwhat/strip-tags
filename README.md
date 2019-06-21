@@ -1,5 +1,9 @@
 Strip-tags
 ==========
+[![Build Status](https://travis-ci.org/manuwhat/strip-tags.svg?branch=master)](https://travis-ci.org/manuwhat/strip-tags)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/manuwhat/strip-tags/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/manuwhat/strip-tags/?branch=master)
+[![Build Status](https://scrutinizer-ci.com/g/manuwhat/strip-tags/badges/build.png?b=master)](https://scrutinizer-ci.com/g/manuwhat/strip-tags/build-status/master)
+[![Code Intelligence Status](https://scrutinizer-ci.com/g/manuwhat/strip-tags/badges/code-intelligence.svg?b=master)](https://scrutinizer-ci.com/code-intelligence)
 
 remove PHP and HTML Tags from a string in a custom and efficient  way
 
@@ -9,11 +13,11 @@ remove PHP and HTML Tags from a string in a custom and efficient  way
 
 ### Why strip-tags package if PHP have the strip_tags function ?
 you could use it if you :
-1.want to remove tags with some attributes only
-2.want to remove some attributes from some tags
-3.want to strip only HTML not PHP or only PHP not HTML
-4.want to remove completely some tags and  from other tags  partially remove some of their attributes
-5.want to specify tags to remove instead of tags to keep or tags to keep instead of tags to remove.
+	1.want to remove tags with some attributes only
+	2.want to remove some attributes from some tags
+	3.want to strip only HTML not PHP or only PHP not HTML
+	4.want to remove completely some tags and  from other tags  partially remove some of their attributes
+	5.want to specify tags to remove instead of tags to keep or tags to keep instead of tags to remove.
 
 
 

@@ -15,7 +15,7 @@ class BeforeStrip
     public function __construct($html)
     {
         if (!is_string($html)) {
-            throw new InvalidArgumentException(sprintf('Waiting string, %s given', gettype($html)));
+            throw new \InvalidArgumentException(sprintf('Waiting string, %s given', gettype($html)));
         }
         $html=is_file($html)?file_get_contents($html):$html;
         $doctypeOffset=stripos($html, '<!doctype ');

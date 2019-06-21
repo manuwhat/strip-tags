@@ -104,7 +104,7 @@ class Htmlstrip extends HtmlstripHelper
         }
     }
    
-    protected static function stripTagsWithAttributes($domDoc, $type, &$allowed_tags, &$allowed_attrs, $is_php)
+    protected static function stripTagsWithAttributes($domDoc, &$allowed_tags, &$allowed_attrs, $is_php)
     {
         if (count(self::$attributes)>count($allowed_attrs)) {
             foreach (new DOMNodeRecursiveIterator($domDoc->getElementsByTagName('*'))as $tag) {

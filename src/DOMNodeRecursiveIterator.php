@@ -14,7 +14,7 @@ class DOMNodeRecursiveIterator extends \ArrayIterator implements \RecursiveItera
    
     public function getRecursiveIterator()
     {
-        return new RecursiveIteratorIterator($this, RecursiveIteratorIterator::SELF_FIRST);
+        return new \RecursiveIteratorIterator($this, \RecursiveIteratorIterator::SELF_FIRST);
     }
    
     public function hasChildren()

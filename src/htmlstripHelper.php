@@ -380,7 +380,7 @@ abstract class htmlstripHelper
         //Suppress warnings: proper error handling is beyond scope of example
         libxml_use_internal_errors(true);
         if (!strlen($html)) {
-            throw new InvalidArgumentException("Empty string given");
+            throw new \InvalidArgumentException("Empty string given");
         }
         $true=$xml->loadHTML($html, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
         if ($true) {

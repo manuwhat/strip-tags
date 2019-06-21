@@ -9,11 +9,11 @@ remove PHP and HTML Tags from a string in a custom and efficient  way
 
 ### Why strip-tags package if PHP have the strip_tags function ?
 you could use it if you :
-want to remove tags with some attributes only
-want to remove some attributes from some tags
-want to strip only HTML not PHP or only PHP not HTML
-want to remove completely some tags and  from other tags  partially remove some of their attributes
-want to specify tags to remove instead of tags to keep or tags to keep instead of tags to remove.
+	want to remove tags with some attributes only
+	want to remove some attributes from some tags
+	want to strip only HTML not PHP or only PHP not HTML
+	want to remove completely some tags and  from other tags  partially remove some of their attributes
+	want to specify tags to remove instead of tags to keep or tags to keep instead of tags to remove.
 
 
 

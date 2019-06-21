@@ -467,18 +467,28 @@ abstract class htmlstripHelper
     {
         if ($tag instanceof \DOMElement) {
             if ($type===2) {
-                foreach (Iterator_to_array($tag->attributes) as $attr) {
-                    if (!isset($allowed_attrs[$attr->nodeName])) {
-                        if ($tag->parentNode) {
-                            $tag->parentNode->removeChild($tag);
-                        }
-                    }
-                }
+                self:: stripAttributesTypeTwo($tag, $allowed_attrs);
             } else {
-                foreach (Iterator_to_array($tag->attributes) as $attr) {
-                    if (!isset($allowed_attrs[$attr->nodeName])) {
-                        $tag->removeAttribute($attr->nodeName);
-                    }
+                self::stripAttributesTypeOne($tag, $allowed_attrs);
+            }
+        }
+    }
+    
+    protected static function stripAttributesTypeOne($tag, &$allowed_attrs)
+    {
+        foreach (Iterator_to_array($tag->attributes) as $attr) {
+            if (!isset($allowed_attrs[$attr->nodeName])) {
+                $tag->removeAttribute($attr->nodeName);
+            }
+        }
+    }
+    
+    protected static function stripAttributesTypeTwo($tag, &$allowed_attrs)
+    {
+        foreach (Iterator_to_array($tag->attributes) as $attr) {
+            if (!isset($allowed_attrs[$attr->nodeName])) {
+                if ($tag->parentNode) {
+                    $tag->parentNode->removeChild($tag);
                 }
             }
         }

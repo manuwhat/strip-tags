@@ -19,16 +19,22 @@ class prepareStrip
         if ($this->state==='single') {
             return $this->prepocessed->getContent();
         }
-        $prepared=
-            array_map(function ($v) {
-                return is_array($v)&&($v[0]===T_OPEN_TAG||$v[0]===T_CLOSE_TAG)?($v[0]===T_OPEN_TAG?'<php>':'</php>'):(is_array($v)?$v[1]:$v);
-            }, $this->prepocessed->getPHP())+
-            array_map(function ($v) {
-                return is_array($v)?$v[1]:$v;
-            }, $this->prepocessed->getHTML())
-        ;
+        $prepared=$this->preparePhp() + $this->prepareHtml();
         ksort($prepared);
         return join('', $prepared);
+    }
+    
+    public function prepareHtml()
+    {
+        return  array_map(function ($v) {
+            return is_array($v)?$v[1]:$v;
+        }, $this->prepocessed->getHTML());
+    }
+    public function preparePhp()
+    {
+        return array_map(function ($v) {
+            return is_array($v)&&($v[0]===T_OPEN_TAG||$v[0]===T_CLOSE_TAG)?($v[0]===T_OPEN_TAG?'<php>':'</php>'):(is_array($v)?$v[1]:$v);
+        }, $this->prepocessed->getPHP());
     }
 }
 }

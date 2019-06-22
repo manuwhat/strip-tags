@@ -376,7 +376,7 @@ abstract class htmlstripHelper
 );
     protected function loadHTML($html)
     {
-        $xml = new \DOMDocument();
+        $xml=new \DOMDocument();
         //Suppress warnings: proper error handling is beyond scope of example
         libxml_use_internal_errors(true);
         if (!strlen($html)) {
@@ -392,7 +392,7 @@ abstract class htmlstripHelper
         if (!is_array($notAllowedTags)) {
             return false;
         }
-        if (count($notAllowedTags) !== 2) {
+        if (count($notAllowedTags)!==2) {
             return false;
         }
         $notAllowedTags=array_values($notAllowedTags);
@@ -403,7 +403,7 @@ abstract class htmlstripHelper
         }
         if (is_array($notAllowedTags)) {
             $notAllowedTags=array_filter(array_map($callback, $notAllowedTags), $callback1);
-            $this->allowedTags=!$keep?array_fill_keys($notAllowedTags, 1):array_diff_key(self::$tags, array_flip($notAllowedTags));
+            $this->allowedTags=!$keep ?array_fill_keys($notAllowedTags, 1) : array_diff_key(self::$tags, array_flip($notAllowedTags));
         } else {
             return false;
         }
@@ -415,17 +415,17 @@ abstract class htmlstripHelper
         if (!is_array($notAllowedAttributes)) {
             return false;
         }
-        if (count($notAllowedAttributes) !== 2) {
+        if (count($notAllowedAttributes)!==2) {
             return false;
         }
         $keep=(bool)$notAllowedAttributes[1];
         $notAllowedAttributes=$notAllowedAttributes[0];
         if (is_string($notAllowedAttributes)) {
-            $notAllowedAttributes= explode(',', $notAllowedAttributes);
+            $notAllowedAttributes=explode(',', $notAllowedAttributes);
         }
         if (is_array($notAllowedAttributes)) {
             $notAllowedAttributes=array_filter(array_map($callback, $notAllowedAttributes), $callback2);
-            $this->allowedAttributes=!$keep?array_fill_keys($notAllowedAttributes, 1):array_diff_key(self::$attributes, array_flip($notAllowedAttributes));
+            $this->allowedAttributes=!$keep ?array_fill_keys($notAllowedAttributes, 1) : array_diff_key(self::$attributes, array_flip($notAllowedAttributes));
         } else {
             return false;
         }
@@ -436,16 +436,15 @@ abstract class htmlstripHelper
     {
         $result=$domDoc->saveHTML();
         self::handleMainHtmlTags($result, $allowed_tags);
-        return substr(($is_php&&isset($allowed_tags['<php>']))?
-        str_replace(array('<php>','</php>'), array('<?php ',' ?>'), $result):
-        $result, stripos($result, '<div>')+5, -7);
+        return substr(($is_php&&isset($allowed_tags['<php>'])) ?
+        str_replace(array('<php>', '</php>'), array('<?php ', ' ?>'), $result) : $result, stripos($result, '<div>')+5, -7);
     }
   
     protected static function handleMainHtmlTags(&$result, &$allowed_tags)
     {
         $result=str_replace(
-            array('<doctypetag','</doctypetag>','<headtag' ,'</headtag','<htmltag','</htmltag','<bodytag','</bodytag'),
-            array('<!doctype','','<head','</head','<html','</html','<body','</body'),
+            array('<doctypetag', '</doctypetag>', '<headtag', '</headtag', '<htmltag', '</htmltag', '<bodytag', '</bodytag'),
+            array('<!doctype', '', '<head', '</head', '<html', '</html', '<body', '</body'),
             $result
                         );
         if (!isset($allowed_tags['<doctypetag>'])) {
@@ -456,7 +455,7 @@ abstract class htmlstripHelper
     protected static function handleComments($domDoc, &$allowed_tags)
     {
         if (!isset($allowed_tags['<!-- -->'])) {
-            $xpath = new \DOMXPath($domDoc);
+            $xpath=new \DOMXPath($domDoc);
             $DomComments=$xpath->query("//comment()");
             foreach ($DomComments as $DomComment) {
                 $DomComment->parentNode->removeChild($DomComment);

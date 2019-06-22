@@ -28,7 +28,7 @@ class htmlStripTest extends TestCase
         $this->assertFalse((bool)stripos($hstrip->go(htmlStrip::ATTRIBUTES), 'src'));
         
         $hstrip=new htmlStrip($data, 'replace', array('',true), array('src',false));
-        $this->assertFalse((bool)stripos($hstrip->go(htmlStrip::ATTRIBUTES), 'type'));
+        $this->assertFalse((bool)stripos($hstrip->go(htmlStrip::ATTRIBUTES), ' type'));
         $this->assertTrue((bool)stripos($hstrip->go(htmlStrip::ATTRIBUTES), 'src'));
     }
 }

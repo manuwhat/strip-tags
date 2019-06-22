@@ -1,12 +1,12 @@
 Strip-tags
 ==========
+
+remove PHP and HTML Tags from a string in a custom and efficient  way
+
 [![Build Status](https://travis-ci.org/manuwhat/strip-tags.svg?branch=master)](https://travis-ci.org/manuwhat/strip-tags)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/manuwhat/strip-tags/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/manuwhat/strip-tags/?branch=master)
 [![Build Status](https://scrutinizer-ci.com/g/manuwhat/strip-tags/badges/build.png?b=master)](https://scrutinizer-ci.com/g/manuwhat/strip-tags/build-status/master)
 [![Code Intelligence Status](https://scrutinizer-ci.com/g/manuwhat/strip-tags/badges/code-intelligence.svg?b=master)](https://scrutinizer-ci.com/code-intelligence)
-
-remove PHP and HTML Tags from a string in a custom and efficient  way
-
 
 **Requires**: PHP 5.3+
 

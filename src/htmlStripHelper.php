@@ -444,8 +444,8 @@ abstract class htmlstripHelper
     protected static function handleMainHtmlTags(&$result, &$allowed_tags)
     {
         $result=str_replace(
-            array('<doctypetag','</doctypetag>','<headtag ' ,'</headtag','<htmltag ','</htmltag','<bodytag ','</bodytag'),
-            array('<!doctype ','','<head ','</head','<html ','</html','<body ','</body'),
+            array('<doctypetag','</doctypetag>','<headtag' ,'</headtag','<htmltag','</htmltag','<bodytag','</bodytag'),
+            array('<!doctype','','<head','</head','<html','</html','<body','</body'),
             $result
                         );
         if (!isset($allowed_tags['<doctypetag>'])) {

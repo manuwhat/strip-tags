@@ -22,12 +22,13 @@ class BeforeStrip
         
         $html='<div>'.str_replace(
             array($this->doctype, $this->html_tag, '</html>', $this->head, '</head>', $this->body, '</body>'),
-            array('<doctypetag '.substr($this->doctype, 10), '<htmltag '.substr($this->html_tag, 5), '</htmltag>', '<headtag '.substr($this->head, 5), '</headtag>', '<bodytag '.substr($this->body, 5), '</bodytag>'),
+            array('<doctypetag'.substr($this->doctype, 9), '<htmltag '.substr($this->html_tag, 5), '</htmltag>', '<headtag '.substr($this->head, 5), '</headtag>', '<bodytag '.substr($this->body, 5), '</bodytag>'),
             $html
                               ).'</doctypetag></div>';
+                             
         $preprocessed=token_get_all($html);
         
-        $HTML=array_filter($preprocessed, function($v) {
+        $HTML=array_filter($preprocessed, function ($v) {
             return is_array($v)&&$v[0]===T_INLINE_HTML;
         });
         $PHP=array_diff_key($preprocessed, $HTML);
@@ -36,7 +37,7 @@ class BeforeStrip
     
     protected function setMainTags(&$html)
     {
-        $doctypeOffset=stripos($html, '<!doctype ');
+        $doctypeOffset=stripos($html, '<!doctype');
         $headOffset=stripos($html, '<head');
         $htmlTagOffset=stripos($html, '<html');
         $bodyOffset=stripos($html, '<body');

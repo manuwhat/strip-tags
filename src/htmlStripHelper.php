@@ -17,7 +17,7 @@ abstract class htmlstripHelper
     protected $head;
     protected $html_tag;
     protected static $events_attributes=array(
-'onabort' => 1,
+  'onabort' => 1,
   'onafterprint' => 1,
   'onbeforeprint' => 1,
   'onbeforeunload' => 1,
@@ -374,19 +374,20 @@ abstract class htmlstripHelper
   '<video>' => 1,
   '<wbr>' => 1,
 );
-    protected function loadHTML($html)
-    {
-        $xml = new \DOMDocument();
-        //Suppress warnings: proper error handling is beyond scope of example
-        libxml_use_internal_errors(true);
-        if (!strlen($html)) {
+	protected function loadHTML($html)
+    {   
+	    if (!strlen($html)) {
             throw new \InvalidArgumentException("Empty string given");
         }
+        $xml = new \DOMDocument();
+        libxml_use_internal_errors(true);
+        
         $true=$xml->loadHTML($html, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
         if ($true) {
             $this->html=$xml;
         }
     }
+    
     protected function handleTags($notAllowedTags, $callback, $callback1)
     {
         if (!is_array($notAllowedTags)) {
@@ -437,7 +438,7 @@ abstract class htmlstripHelper
         $result=$domDoc->saveHTML();
         self::handleMainHtmlTags($result, $allowed_tags);
         return substr(($is_php&&isset($allowed_tags['<php>']))?
-        str_replace(array('<php>','</php>'), array('<?php ',' ?>'), $result):
+        str_replace(array('<php>','</php>'), array('<?php ','?>'), $result):
         $result, stripos($result, '<div>')+5, -7);
     }
   

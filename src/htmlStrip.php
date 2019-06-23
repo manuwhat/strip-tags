@@ -27,10 +27,10 @@ class Htmlstrip extends HtmlstripHelper
         $this->loadHTML($bs->getPrepared());
     }
     
-    
-
-   
-
+	
+	
+	
+	
     public function go($type=self::TAGS)
     {
         switch ($type) {

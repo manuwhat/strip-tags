@@ -25,3 +25,7 @@ var_dump((bool)stripos($hstrip->go(htmlStrip::ATTRIBUTES), 'src')); //false
 $hstrip=new htmlStrip($data, 'replace', array('',true), array('src',false));
 var_dump((bool)stripos($hstrip->go(htmlStrip::ATTRIBUTES), ' type'));//false
 var_dump((bool)stripos($hstrip->go(htmlStrip::ATTRIBUTES), 'src'));//true;
+
+$hstrip=new htmlStrip($data, 'replace', array('<doctypetag>', true));
+$hstrip1=new htmlStrip($data, 'replace', array('<!doctype>', true));
+var_dump($hstrip->go()===$hstrip1->go());

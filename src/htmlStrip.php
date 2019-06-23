@@ -27,10 +27,10 @@ class Htmlstrip extends HtmlstripHelper
         $this->loadHTML($bs->getPrepared());
     }
     
-	
-	
-	
-	
+    
+    
+    
+    
     public function go($type=self::TAGS)
     {
         switch ($type) {
@@ -71,7 +71,7 @@ class Htmlstrip extends HtmlstripHelper
             
             self::handleComments($domDoc, $allowed_tags);
         }
-        
+         
         return self::handlePhp($is_php, $domDoc, $allowed_tags);
     }
     

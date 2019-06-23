@@ -247,6 +247,7 @@ abstract class htmlstripHelper
   'width' => 1,
   'wrap' => 1,
 );
+    protected static $special_tags=array('<doctypetag>'=>'<!doctype>','<htmltag>'=>'<html>','<headtag>'=>'<head>','<htmltag>'=>'<html>','<bodytag>'=>'<body>');
     protected static $tags=array(
   '<php>'=> 1,
   '<!-- -->' => 1,
@@ -306,7 +307,7 @@ abstract class htmlstripHelper
   '<h5>' => 1,
   '<h6>' => 1,
   '<hn>' => 1,
-  '<head>' => 1,
+  '<headtag>' => 1,
   '<header>' => 1,
   '<hr>' => 1,
   '<htmltag>' => 1,
@@ -375,13 +376,13 @@ abstract class htmlstripHelper
   '<wbr>' => 1,
 );
 
-	protected function loadHTML($html)
-    {   
+    protected function loadHTML($html)
+    {
         if (!strlen($html)) {
             throw new \InvalidArgumentException("Empty string given");
         }
         $xml = new \DOMDocument();
-		//Suppress warnings: proper error handling is beyond scope of example
+        //Suppress warnings: proper error handling is beyond scope of example
         libxml_use_internal_errors(true);
         
         $true=$xml->loadHTML($html, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
@@ -405,12 +406,22 @@ abstract class htmlstripHelper
             $notAllowedTags=explode(',', $notAllowedTags);
         }
         if (is_array($notAllowedTags)) {
+            self::checkSpecialTags($notAllowedTags);
             $notAllowedTags=array_filter(array_map($callback, $notAllowedTags), $callback1);
             $this->allowedTags=!$keep ?array_fill_keys($notAllowedTags, 1) : array_diff_key(self::$tags, array_flip($notAllowedTags));
         } else {
             return false;
         }
         return true;
+    }
+    
+    protected static function checkSpecialTags(&$notAllowedTags)
+    {
+        foreach (self::$special_tags as $fakeTag =>$trueTag) {
+            if (false!==$key=array_search($trueTag, $notAllowedTags, true)) {
+                $notAllowedTags[$key]=$fakeTag;
+            }
+        }
     }
 
     protected function handleAttributes($notAllowedAttributes, $callback, $callback2)

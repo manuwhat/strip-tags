@@ -27,7 +27,7 @@ class BeforeStrip
                                 ).'</doctypetag></div>';
         $preprocessed=token_get_all($html);
         
-        $HTML=array_filter($preprocessed, function ($v) {
+        $HTML=array_filter($preprocessed, function($v) {
             return is_array($v)&&$v[0]===T_INLINE_HTML;
         });
         $PHP=array_diff_key($preprocessed, $HTML);

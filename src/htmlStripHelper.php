@@ -1,22 +1,23 @@
 <?php
+
 namespace EZAMA{
-abstract class htmlstripHelper
+abstract class htmlStripHelper
 {
-    const TAGS=3;
-    const ATTRIBUTES=4;
-    const TAGS_AND_ATTRIBUTES=1;
-    const TAGS_WITH_ATTRIBUTES=2;
-    
-    protected $is_php=false;
-    protected $is_html=false;
-    protected $allowedTags=array();
-    protected $allowedAttributes=array();
-    protected $html='';
+    const TAGS = 3;
+    const ATTRIBUTES = 4;
+    const TAGS_AND_ATTRIBUTES = 1;
+    const TAGS_WITH_ATTRIBUTES = 2;
+
+    protected $is_php = false;
+    protected $is_html = false;
+    protected $allowedTags = [];
+    protected $allowedAttributes = [];
+    protected $html = '';
     protected $doctype;
     protected $body;
     protected $head;
     protected $html_tag;
-    protected static $events_attributes=array(
+    protected static $events_attributes = [
     'onabort' => 1,
     'onafterprint' => 1,
     'onbeforeprint' => 1,
@@ -83,10 +84,10 @@ abstract class htmlstripHelper
     'onunload' => 1,
     'onvolumechange' => 1,
     'onwaiting' => 1,
-    'onwheel' => 1
-    );
- 
-    protected static $attributes=array(
+    'onwheel' => 1,
+    ];
+
+    protected static $attributes = [
     'accept' => 1,
     'accesskey' => 1,
     'action' => 1,
@@ -246,10 +247,10 @@ abstract class htmlstripHelper
     'value' => 1,
     'width' => 1,
     'wrap' => 1,
-);
-    protected static $special_tags=array('<doctypetag>'=>'<!doctype>', '<htmltag>'=>'<html>', '<headtag>'=>'<head>', '<htmltag>'=>'<html>', '<bodytag>'=>'<body>');
-    protected static $tags=array(
-    '<php>'=> 1,
+];
+    protected static $special_tags = ['<doctypetag>' => '<!doctype>', '<htmltag>' => '<html>', '<headtag>' => '<head>', '<htmltag>' => '<html>', '<bodytag>' => '<body>'];
+    protected static $tags = [
+    '<php>' => 1,
     '<!-- -->' => 1,
     '<doctypetag>' => 1,
     '<a>' => 1,
@@ -374,52 +375,53 @@ abstract class htmlstripHelper
     '<var>' => 1,
     '<video>' => 1,
     '<wbr>' => 1,
-);
+];
 
     protected function loadHTML($html)
     {
         if (!strlen($html)) {
-            throw new \InvalidArgumentException("Empty string given");
+            throw new \InvalidArgumentException('Empty string given');
         }
-        $xml=new \DOMDocument();
+        $xml = new \DOMDocument();
         //Suppress warnings: proper error handling is beyond scope of example
         libxml_use_internal_errors(true);
-        
-        $true=$xml->loadHTML($html, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+
+        $true = $xml->loadHTML($html, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
         if ($true) {
-            $this->html=$xml;
+            $this->html = $xml;
         }
     }
-    
+
     protected function handleTags($notAllowedTags, $callback, $callback1)
     {
         if (!is_array($notAllowedTags)) {
             return false;
         }
-        if (count($notAllowedTags)!==2) {
+        if (count($notAllowedTags) !== 2) {
             return false;
         }
-        $notAllowedTags=array_values($notAllowedTags);
-        $keep=(bool)$notAllowedTags[1];
-        $notAllowedTags=$notAllowedTags[0];
+        $notAllowedTags = array_values($notAllowedTags);
+        $keep = (bool)$notAllowedTags[1];
+        $notAllowedTags = $notAllowedTags[0];
         if (is_string($notAllowedTags)) {
-            $notAllowedTags=explode(',', $notAllowedTags);
+            $notAllowedTags = explode(',', $notAllowedTags);
         }
         if (is_array($notAllowedTags)) {
             self::checkSpecialTags($notAllowedTags);
-            $notAllowedTags=array_filter(array_map($callback, $notAllowedTags), $callback1);
-            $this->allowedTags=!$keep ?array_fill_keys($notAllowedTags, 1) : array_diff_key(self::$tags, array_flip($notAllowedTags));
+            $notAllowedTags = array_filter(array_map($callback, $notAllowedTags), $callback1);
+            $this->allowedTags = !$keep ? array_fill_keys($notAllowedTags, 1) : array_diff_key(self::$tags, array_flip($notAllowedTags));
         } else {
             return false;
         }
+
         return true;
     }
-    
+
     protected static function checkSpecialTags(&$notAllowedTags)
     {
-        foreach (self::$special_tags as $fakeTag =>$trueTag) {
-            if (false!==$key=array_search($trueTag, $notAllowedTags, true)) {
-                $notAllowedTags[$key]=$fakeTag;
+        foreach (self::$special_tags as $fakeTag => $trueTag) {
+            if (false !== $key = array_search($trueTag, $notAllowedTags, true)) {
+                $notAllowedTags[$key] = $fakeTag;
             }
         }
     }
@@ -429,76 +431,80 @@ abstract class htmlstripHelper
         if (!is_array($notAllowedAttributes)) {
             return false;
         }
-        if (count($notAllowedAttributes)!==2) {
+        if (count($notAllowedAttributes) !== 2) {
             return false;
         }
-        $keep=(bool)$notAllowedAttributes[1];
-        $notAllowedAttributes=$notAllowedAttributes[0];
+        $keep = (bool)$notAllowedAttributes[1];
+        $notAllowedAttributes = $notAllowedAttributes[0];
         if (is_string($notAllowedAttributes)) {
-            $notAllowedAttributes=explode(',', $notAllowedAttributes);
+            $notAllowedAttributes = explode(',', $notAllowedAttributes);
         }
         if (is_array($notAllowedAttributes)) {
-            $notAllowedAttributes=array_filter(array_map($callback, $notAllowedAttributes), $callback2);
-            $this->allowedAttributes=!$keep ?array_fill_keys($notAllowedAttributes, 1) : array_diff_key(self::$attributes, array_flip($notAllowedAttributes));
+            $notAllowedAttributes = array_filter(array_map($callback, $notAllowedAttributes), $callback2);
+            $this->allowedAttributes = !$keep ? array_fill_keys($notAllowedAttributes, 1) : array_diff_key(self::$attributes, array_flip($notAllowedAttributes));
         } else {
             return false;
         }
+
         return true;
     }
-    
+
     protected static function handlePhp($is_php, $domDoc, &$allowed_tags)
     {
-        $result=$domDoc->saveHTML();
+        $result = $domDoc->saveHTML();
         self::handleMainHtmlTags($result, $allowed_tags);
-        return substr(($is_php&&isset($allowed_tags['<php>'])) ?
-        str_replace(array('<php>', '</php>'), array('<?php ', '?>'), $result) : $result, stripos($result, '<div>')+5, -7);
+
+        return substr(($is_php && isset($allowed_tags['<php>'])) ?
+        str_replace(['<php>', '</php>'], ['<?php ', '?>'], $result) : $result, stripos($result, '<div>') + 5, -7);
     }
-  
+
     protected static function handleMainHtmlTags(&$result, &$allowed_tags)
     {
-        $result=str_replace(
-            array('<doctypetag', '</doctypetag>', '<headtag', '</headtag', '<htmltag', '</htmltag', '<bodytag', '</bodytag'),
-            array('<!doctype', '', '<head', '</head', '<html', '</html', '<body', '</body'),
+        $result = str_replace(
+            ['<doctypetag', '</doctypetag>', '<headtag', '</headtag', '<htmltag', '</htmltag', '<bodytag', '</bodytag'],
+            ['<!doctype', '', '<head', '</head', '<html', '</html', '<body', '</body'],
             $result
                         );
         if (!isset($allowed_tags['<doctypetag>'])) {
-            $doctypeOffset=stripos($result, '<!doctype');
-            $result=str_replace(substr($result, $doctypeOffset, strpos($result, '>', $doctypeOffset)+1-$doctypeOffset), '', $result);
+            $doctypeOffset = stripos($result, '<!doctype');
+            $result = str_replace(substr($result, $doctypeOffset, strpos($result, '>', $doctypeOffset) + 1 - $doctypeOffset), '', $result);
         }
     }
+
     protected static function handleComments($domDoc, &$allowed_tags)
     {
         if (!isset($allowed_tags['<!-- -->'])) {
-            $xpath=new \DOMXPath($domDoc);
-            $DomComments=$xpath->query("//comment()");
+            $xpath = new \DOMXPath($domDoc);
+            $DomComments = $xpath->query('//comment()');
             foreach ($DomComments as $DomComment) {
                 $DomComment->parentNode->removeChild($DomComment);
             }
         }
     }
-    protected static function stripAttributes($tag, &$allowed_attrs, $type=1)
+
+    protected static function stripAttributes($tag, &$allowed_attrs, $type = 1)
     {
         if ($tag instanceof \DOMElement) {
-            if ($type===2) {
+            if ($type === 2) {
                 self:: stripAttributesTypeTwo($tag, $allowed_attrs);
             } else {
                 self::stripAttributesTypeOne($tag, $allowed_attrs);
             }
         }
     }
-    
+
     protected static function stripAttributesTypeOne($tag, &$allowed_attrs)
     {
-        foreach (Iterator_to_array($tag->attributes) as $attr) {
+        foreach (iterator_to_array($tag->attributes) as $attr) {
             if (!isset($allowed_attrs[$attr->nodeName])) {
                 $tag->removeAttribute($attr->nodeName);
             }
         }
     }
-    
+
     protected static function stripAttributesTypeTwo($tag, &$allowed_attrs)
     {
-        foreach (Iterator_to_array($tag->attributes) as $attr) {
+        foreach (iterator_to_array($tag->attributes) as $attr) {
             if (!isset($allowed_attrs[$attr->nodeName])) {
                 if ($tag->parentNode) {
                     $tag->parentNode->removeChild($tag);
@@ -507,5 +513,4 @@ abstract class htmlstripHelper
         }
     }
 }
-
 }

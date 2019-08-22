@@ -36,7 +36,7 @@ class htmlStrip extends htmlStripHelper
                 return self::strip($this->html, $this->type, $this->allowedTags, $this->allowedAttributes, $this->is_php);
             break;
             case self::TAGS_WITH_ATTRIBUTES:
-                return self::stripTagsWithAttrs($this->html, $this->allowedTags, $this->allowedAttributes, $this->is_php);
+                return self::stripTagsWithAttributes($this->html, $this->allowedTags, $this->allowedAttributes, $this->is_php);
             break;
             case self::TAGS:
                 return self::strip($this->html, $this->type, $this->allowedTags, self::$attributes, $this->is_php);

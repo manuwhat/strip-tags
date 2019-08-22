@@ -1,7 +1,8 @@
 <?php
 
-namespace EZAMA{
-class prepareStrip
+namespace EZAMA;
+
+class PrepareStrip
 {
     protected $state;
     protected $preprocessed;
@@ -40,5 +41,4 @@ class prepareStrip
             return is_array($v) && ($v[0] === T_OPEN_TAG || $v[0] === T_CLOSE_TAG) ? ($v[0] === T_OPEN_TAG ? '<php>' : '</php>') : (is_array($v) ? $v[1] : $v);
         }, $this->prepocessed->getPHP());
     }
-}
 }

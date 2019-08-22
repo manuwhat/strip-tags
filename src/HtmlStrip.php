@@ -1,7 +1,8 @@
 <?php
 
-namespace EZAMA{
-class htmlStrip extends htmlStripHelper
+namespace EZAMA;
+
+class HtmlStrip extends HtmlStripHelper
 {
     protected $type;
 
@@ -25,7 +26,7 @@ class htmlStrip extends htmlStripHelper
         $bs = new BeforeStrip($html);
         $this->is_html = $bs->isHtml();
         $this->is_php = $bs->isPHP();
-        $bs = new prepareStrip($bs);
+        $bs = new PrepareStrip($bs);
         $this->loadHTML($bs->getPrepared());
     }
 
@@ -126,5 +127,4 @@ class htmlStrip extends htmlStripHelper
     {
         return array_keys(self::$tags);
     }
-}
 }

@@ -1,7 +1,8 @@
 <?php
 
-namespace EZAMA{
-abstract class htmlStripHelper
+namespace EZAMA;
+
+abstract class HtmlStripHelper
 {
     const TAGS = 3;
     const ATTRIBUTES = 4;
@@ -512,5 +513,4 @@ abstract class htmlStripHelper
             }
         }
     }
-}
 }

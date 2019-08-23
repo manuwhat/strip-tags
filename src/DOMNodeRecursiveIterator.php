@@ -1,6 +1,7 @@
 <?php
 
-namespace EZAMA{
+namespace EZAMA;
+
 class DOMNodeRecursiveIterator extends \ArrayIterator implements \RecursiveIterator
 {
     public function __construct(\DOMNodeList $node_list)
@@ -27,5 +28,4 @@ class DOMNodeRecursiveIterator extends \ArrayIterator implements \RecursiveItera
     {
         return new self($this->current()->childNodes);
     }
-}
 }

@@ -1,7 +1,8 @@
 <?php
 
-namespace EZAMA{
-class beforeStrip
+namespace EZAMA;
+
+class BeforeStrip
 {
     protected $multi = false;
     protected $is_html = false;
@@ -122,5 +123,4 @@ class beforeStrip
     {
         return $this->html_tag;
     }
-}
 }

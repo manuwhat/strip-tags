@@ -8,7 +8,10 @@ remove PHP and HTML Tags from a string in a custom and efficient  way
 [![Build Status](https://scrutinizer-ci.com/g/manuwhat/strip-tags/badges/build.png?b=master)](https://scrutinizer-ci.com/g/manuwhat/strip-tags/build-status/master)
 [![Code Intelligence Status](https://scrutinizer-ci.com/g/manuwhat/strip-tags/badges/code-intelligence.svg?b=master)](https://scrutinizer-ci.com/code-intelligence)
 
+
 **Requires**: PHP 7.0+
+=======
+
 
 
 ### Why strip-tags package if PHP have the strip_tags function ?
@@ -33,7 +36,7 @@ Require the library by issuing this command:
 composer require manuwhat/strip-tags
 ```
 
-Add `require 'vendor/autoload.php';` to the top of your script.
+then you can use it this way:
 
 
 
@@ -49,7 +52,8 @@ var_export(htmlspecialchars($hstrip->go()));//execute
 var_export(htmlspecialchars($hstrip->go(htmlstrip::TAGS)));//act only on tags
 var_export(htmlspecialchars($hstrip->go(htmlstrip::ATTRIBUTES)));//act only on attributes
 var_export(htmlspecialchars($hstrip->go(htmlstrip::TAGS_AND_ATTRIBUTES)));//act on tags and  attributes this is the default behavior
-var_export(htmlspecialchars($hstrip->go(htmlstrip::TAGS_AND_ATTRIBUTES)));//act on tags with some attributes
+var_export(htmlspecialchars($hstrip->go(htmlstrip::TAGS_WITH_ATTRIBUTES)));//act on tags with some attributes 
+
 ```
 
 To run unit tests

@@ -8,18 +8,25 @@ remove PHP and HTML Tags from a string in a custom and efficient  way
 [![Build Status](https://scrutinizer-ci.com/g/manuwhat/strip-tags/badges/build.png?b=master)](https://scrutinizer-ci.com/g/manuwhat/strip-tags/build-status/master)
 [![Code Intelligence Status](https://scrutinizer-ci.com/g/manuwhat/strip-tags/badges/code-intelligence.svg?b=master)](https://scrutinizer-ci.com/code-intelligence)
 
-**Requires**: PHP ^7
+
+**Requires**: PHP 7.0+
+=======
+
 
 
 ### Why strip-tags package if PHP have the strip_tags function ?
 you could use it if you :
-	1.want to remove tags with some attributes only
-	2.want to remove some attributes from some tags
-	3.want to strip only HTML not PHP or only PHP not HTML
-	4.want to remove completely some tags and  from other tags  partially remove some of their attributes
-	5.want to specify tags to remove instead of tags to keep or tags to keep instead of tags to remove.
 
+1. want to remove tags with some attributes only
 
+2. want to remove some attributes from some tags
+
+3. want to strip only HTML not PHP or only PHP not HTML
+
+4. want to remove completely some tags and  from other tags  partially remove some of
+their attributes
+
+5. want to specify tags to remove instead of tags to keep or tags to keep instead of tags to remove.
 
 ### How to use it
 
@@ -46,10 +53,10 @@ var_export(htmlspecialchars($hstrip->go(htmlstrip::TAGS)));//act only on tags
 var_export(htmlspecialchars($hstrip->go(htmlstrip::ATTRIBUTES)));//act only on attributes
 var_export(htmlspecialchars($hstrip->go(htmlstrip::TAGS_AND_ATTRIBUTES)));//act on tags and  attributes this is the default behavior
 var_export(htmlspecialchars($hstrip->go(htmlstrip::TAGS_WITH_ATTRIBUTES)));//act on tags with some attributes 
+
 ```
 
-To run unit tests 
+To run unit tests
 ```bash
-phpunit  ./tests
+composer test
 ```
-

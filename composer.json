@@ -1,5 +1,5 @@
 {
-    "name": "manuwhat/strip-tags",
+    "name": "salimk/strip-tags",
     "type": "library",
     "description": "remove PHP and HTML Tags from a string in a custom and efficient  way",
     "keywords": [
@@ -9,17 +9,18 @@
 		"clean",
 		"string"
     ],
-    "homepage": "https://github.com/manuwhat/strip-tags",
+    "homepage": "https://github.com/salimk/strip-tags",
     "license": "MIT",
     "authors": [
         {
-            "name": "Akpé Aurelle Emmanuel Moïse Zinsou",
-            "email": "leizmo@gmail.com"
+            "name": "Akpé Aurelle Emmanuel Moïse Zinsou, Salim KHALIL",
+            "email": "leizmo@gmail.com,khalilsalim1@gmail.com"
         }
     ],
     "require": {
         "php": "^7.0"
     },
+	
     "require-dev": {
         "phpunit/phpunit": "^6.5.0",
         "friendsofphp/php-cs-fixer": "^2.15"
@@ -44,5 +45,10 @@
             "@test"
         ]
     },
+    "extra": {
+    "branch-alias": {
+      "dev-master": "v1.0.2"
+    }
+  },
     "minimum-stability": "dev"
 }

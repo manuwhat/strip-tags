@@ -43,5 +43,6 @@
             "@check-style",
             "@test"
         ]
-    }
+    },
+    "minimum-stability": "dev"
 }
